@@ -1,1 +1,18 @@
-<p>image-container works!</p>
+<div class="card-container">
+    <div *ngIf="imageObject">
+            <img src={{imageObject.url}}>
+    </div>
+    <div class="information">
+        <div class="row">
+            <p class="description col-12">
+                {{imageObject.title}} - {{imageObject.date}}
+            </p>
+        </div>
+        <div class="row">
+            <p class="description">
+                {{imageObject.explanation}}
+            <p>
+        </div>
+        <button type="button" (click)="toggleLike()" class= "btn btn-outline-secondary" [ngClass]="{'liked': liked, 'default': !liked}">Like</button>
+    </div>
+</div>

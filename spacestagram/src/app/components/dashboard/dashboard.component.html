@@ -1,2 +1,7 @@
-<h2>Spacestagram</h2>
-<h3>Brought to you by NASA's image api</h3>
+<div class="row-outer">
+    <h2>Spacestagram</h2>
+    <h3>Brought to you by NASA's image api</h3>
+    <div *ngFor="let imageObject of imageObjects">
+        <app-image-container [imageObject]="imageObject"></app-image-container>
+    </div>
+</div>
