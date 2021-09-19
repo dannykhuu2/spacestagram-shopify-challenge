@@ -13,11 +13,23 @@ export class ImageContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    if (this.imageObject.liked) {
+      this.liked = true;
+    }
   }
 
   toggleLike() {
+    if (this.liked === false) {
+      this.imageObject["liked"] = 'true';
+      localStorage.setItem('nasaImage!@#' + this.imageObject.title, JSON.stringify(this.imageObject));
+    } else if (this.liked === true) {
+      try {
+        localStorage.removeItem('nasaImage!@#' + this.imageObject.title);
+      } catch(e) {
+        console.log(e);
+      }
+      
+    }
     this.liked = !this.liked;
   }
-
 }

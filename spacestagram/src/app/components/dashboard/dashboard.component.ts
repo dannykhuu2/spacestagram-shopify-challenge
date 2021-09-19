@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 
 @Component({
@@ -9,15 +9,20 @@ import { ImageService } from 'src/app/services/image.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   imageServiceSubscription!: Subscription;
+  likedImages$ = this.imageService.getLikedImages();
+  fetchedImages$ = this.imageService.getImages();
   imageObjects: any;
 
   constructor(private imageService: ImageService) { }
 
   ngOnInit(): void {
-    this.imageServiceSubscription = this.imageServiceSubscription = this.imageService.getImages().subscribe(image => {
-      this.imageObjects = image;
-      console.log(this.imageObjects);
+    this.imageServiceSubscription = combineLatest([this.likedImages$, this.fetchedImages$]).subscribe(([likedImages, fetchedImages]) => {
+      this.imageObjects = likedImages.concat(fetchedImages);
     });
+    // this.imageServiceSubscription = this.imageService.getImages().subscribe(image => {
+    //   this.imageObjects = image;
+    //   console.log(this.imageObjects);
+    // });
   }
 
   ngOnDestroy() {
