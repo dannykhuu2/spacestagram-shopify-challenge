@@ -1,15 +1,13 @@
 <div class="card-container">
-    <div *ngIf="imageObject">
-            <img src={{imageObject.url}}>
-    </div>
+    <img src={{imageObject.url}}>
     <div class="information">
         <div class="row">
-            <p class="description col-12">
+            <p class="description-header col-12">
                 {{imageObject.title}} - {{imageObject.date}}
             </p>
         </div>
         <div class="row">
-            <p class="description">
+            <p class="description-body">
                 {{imageObject.explanation}}
             <p>
         </div>

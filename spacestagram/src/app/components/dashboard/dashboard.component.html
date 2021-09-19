@@ -1,7 +1,16 @@
-<div class="row-outer">
-    <h2>Spacestagram</h2>
-    <h3>Brought to you by NASA's image api</h3>
-    <div *ngFor="let imageObject of imageObjects">
-        <app-image-container [imageObject]="imageObject"></app-image-container>
+<div class="page-container">
+    <div class="header">
+        <div class="header-contents">
+            <h1 class="display-4">Spacestagram</h1>
+            <p class="lead">Brought to you by NASA's Astronomy Photo of the Day (APOD) API</p>
+        </div>
     </div>
+    <ng-container *ngIf="imageObjects; else loadingSpinner">
+        <app-image-container *ngFor="let imageObject of imageObjects" [imageObject]="imageObject"></app-image-container>
+    </ng-container>
 </div>
+<ng-template #loadingSpinner>
+    <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</ng-template>
